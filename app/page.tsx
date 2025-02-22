@@ -2,6 +2,6 @@
 
 import Home from "../page"
 
-export default function SyntheticV0PageForDeployment() {
+export default function IIITDMCSE() {
   return <Home />
 }

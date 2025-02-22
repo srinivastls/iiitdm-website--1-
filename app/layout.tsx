@@ -2,9 +2,8 @@ import type { Metadata } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'v0 App',
-  description: 'Created with v0',
-  generator: 'v0.dev',
+  title: 'IIITDM CSE Department - Home', 
+  description: 'official website of the Department of Computer Science and Engineering, IIITDM Kancheepuram',
 }
 
 export default function RootLayout({
