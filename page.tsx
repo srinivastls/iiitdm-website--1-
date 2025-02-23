@@ -5,15 +5,11 @@ import Link from "next/link"
 import Image from "next/image"
 import { motion, AnimatePresence } from "framer-motion"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog"
 import {
   GraduationCap,
   BookOpen,
-  FlaskRoundIcon as Flask,
-  Users,
-  Building2,
   ArrowRight,
   ChevronRight,
   Cpu,
@@ -22,16 +18,19 @@ import {
   Code,
   BotIcon as Robot,
   Cloud,
-  Search,
-  Menu,
   CircuitBoardIcon as Circuit,
   Laptop,
   MicroscopeIcon as Microchip,
+  Users,
+  Award,
 } from "lucide-react"
 import NewsTicker from "@/components/NewsTicker"
 import MainNav from "@/components/MainNav"
 import SidebarNews from "@/components/SidebarNews"
 import HeroSection from "@/components/HeroSection"
+import ProgramsOffered from "@/components/ProgramsOffered"
+import Laboratories from "@/components/Laboratories"
+import DepartmentStats from "@/components/DepartmentStats"
 
 // ... (keep the rest of your imports and data)
 
@@ -189,77 +188,96 @@ export default function Home() {
                 <span className="text-sm text-gray-600">Department of Computer Science & Engineering</span>
               </div>
             </Link>
-            <nav className="hidden lg:flex space-x-6">
-              <MainNav />
-            </nav>
-            <div className="flex items-center space-x-4">
-              <form className="hidden md:flex items-center">
-                <Input type="search" placeholder="Search..." className="w-64 rounded-r-none" />
-                <Button type="submit" size="default" variant="default" className="bg-blue-600 rounded-l-none">
-                  <Search className="h-4 w-4 mr-2" />
-                  Search
-                </Button>
-              </form>
-              <Button variant="outline" size="icon" className="lg:hidden">
-                <Menu className="h-6 w-6" />
-                <span className="sr-only">Menu</span>
-              </Button>
-            </div>
+            <MainNav />
           </div>
         </div>
       </header>
 
-      <main className="pt-16">
+      <main className="pt-20">
         <HeroSection />
         <NewsTicker />
 
-        {/* Main Content */}
-        <section className="py-12">
+        {/* Main Content and Sidebar */}
+        <section className="py-16 bg-gradient-to-br from-blue-50 to-indigo-50">
           <div className="container mx-auto px-4">
             <div className="flex flex-col lg:flex-row gap-8">
               {/* Left Column - Main Content */}
-              <div className="lg:w-2/3">
-                <h2 className="text-3xl font-bold mb-6">Welcome to Computer Science and Engineering</h2>
-                <div className="prose max-w-none">
-                  <p>
-                    Computer Science and Engineering stream started in 2009. IIITDM Kancheepuram's Computer Science and
-                    Engineering curriculum is modeled on the ACM (Association for Computing Machinery) recommendations
-                    and is the first of its kind engineering program offered in India.
-                  </p>
-                  <p>
-                    This program is aimed at producing engineers equipped with skills required for efficient
-                    hardware-software interaction. In addition to courses offered by the conventional Computer Science
-                    curriculum, this novel program offers core courses such as Embedded Systems, Human-Computer
-                    Interaction, Signals and Systems, Product Design etc., that equip the students with both computing
-                    and electronics engineering skills that are very much required for the successful creation of
-                    products requiring hardware - software interactions.
-                  </p>
-                  <p>
-                    Our graduates would find wide scope in VLSI, Embedded Systems and Electronics Product Manufacturing
-                    related industries in addition to application development avenues and higher studies that are open
-                    to conventional Computer Science engineers.
-                  </p>
-                  <p>
-                  Department of Computer Science and Engineering (CSE) offers design centric programmes such as B.Tech (CSE), B.Tech(CSE with Major in AI), Dual Degree (DD) programmes (B.Tech in CSE and M.Tech in CSE), M.Tech.(CSE with Specialization in Data Science and Artificial Intelligence) and Ph.D in various research areas in computer science. The department has enthusiastic students numbering around 550 which includes B.Tech, DD students, M.Tech and Ph.D scholars. There are 14 faculty members who are actively involved in research in areas such as knowledge engineering, machine learning, wireless sensor networks, membrane computing, cyber-physical systems, IOT, high performance computing, VLSI architectures, biometrics, machine learning, image processing, soft computing and theoretical computer science.
+              <div className="lg:w-2/3 space-y-8">
+                {/* Welcome to CSE Card */}
+                <Card className="overflow-hidden group hover:shadow-lg transition-shadow duration-300">
+                  <CardHeader className="bg-gradient-to-r from-blue-600 to-indigo-600">
+                    <CardTitle className="text-2xl font-bold text-white">
+                      Welcome to Computer Science and Engineering
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="p-6">
+                    <div className="prose max-w-none">
+                      <motion.p
+                        className="mb-4 group-hover:text-blue-700 transition-colors duration-300"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5 }}
+                      >
+                        Computer Science and Engineering stream started in 2009. IIITDM Kancheepuram's Computer Science
+                        and Engineering curriculum is modeled on the ACM (Association for Computing Machinery)
+                        recommendations and is the first of its kind engineering program offered in India.
+                      </motion.p>
+                      <motion.p
+                        className="mb-4 group-hover:text-blue-700 transition-colors duration-300"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5, delay: 0.1 }}
+                      >
+                        This program is aimed at producing engineers equipped with skills required for efficient
+                        hardware-software interaction. In addition to courses offered by the conventional Computer
+                        Science curriculum, this novel program offers core courses such as Embedded Systems,
+                        Human-Computer Interaction, Signals and Systems, Product Design etc., that equip the students
+                        with both computing and electronics engineering skills that are very much required for the
+                        successful creation of products requiring hardware - software interactions.
+                      </motion.p>
+                      <motion.p
+                        className="group-hover:text-blue-700 transition-colors duration-300"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5, delay: 0.2 }}
+                      >
+                        Our graduates would find wide scope in VLSI, Embedded Systems and Electronics Product
+                        Manufacturing related industries in addition to application development avenues and higher
+                        studies that are open to conventional Computer Science engineers.
+                      </motion.p>
 
-                  </p>
-                </div>
+                      <motion.p
+                        className="group-hover:text-blue-700 transition-colors duration-300"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5, delay: 0.2 }}
+                      >
+                        
+                        There are 14 faculty members who are actively involved in research in areas
+                         such as knowledge engineering, machine learning, wireless sensor networks, 
+                         membrane computing, cyber-physical systems, IOT, high performance computing, 
+                         VLSI architectures, biometrics, machine learning, image processing, 
+                         soft computing and theoretical computer science.
+                      
+                      </motion.p>
+                    </div>
+                    <Button className="mt-6 bg-blue-600 hover:bg-blue-700 text-white">
+                      Read More
+                      <ArrowRight className="ml-2 h-4 w-4" />
+                    </Button>
+                  </CardContent>
+                </Card>
 
-                <Button className="mt-8">
-                  Read More
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
-
-                {/* New Intake Information Section */}
-                <div className="mt-12 bg-white rounded-lg shadow-lg overflow-hidden border border-blue-100">
-                  <div className="bg-gradient-to-r from-blue-600 to-indigo-600 px-6 py-4">
-                    <h3 className="text-2xl font-bold text-white">
-                      Intake in CSE Department for the Academic Year 2021-2022
-                    </h3>
-                  </div>
-                  <div className="p-6">
+                {/* Intake in CSE Department Card */}
+                <Card className="overflow-hidden group hover:shadow-lg transition-shadow duration-300">
+                  <CardHeader className="bg-blue-600">
+                    <CardTitle className="text-2xl font-bold text-white">Intake in CSE Department</CardTitle>
+                    <CardDescription className="text-indigo-100">Academic Year 2021-2022</CardDescription>
+                  </CardHeader>
+                  <CardContent className="p-6">
                     <ul className="space-y-4">
                       <IntakeItem
+                        icon={<GraduationCap className="w-6 h-6" />}
                         program="B.Tech in CSE"
                         total={85}
                         breakdown={[
@@ -268,6 +286,7 @@ export default function Home() {
                         ]}
                       />
                       <IntakeItem
+                        icon={<Award className="w-6 h-6" />}
                         program="B.Tech in CSE with Major in AI"
                         total={43}
                         breakdown={[
@@ -276,24 +295,22 @@ export default function Home() {
                         ]}
                       />
                       <IntakeItem
-                        program="M.Tech in CSE with Specialization in Data Science and Artificial Intelligence"
+                        icon={<BookOpen className="w-6 h-6" />}
+                        program="M.Tech in CSE (Data Science and AI)"
                         total={21}
                         breakdown={[
                           { label: "GATE based", value: 20 },
                           { label: "DASA", value: 1 },
                         ]}
                       />
-                      <IntakeItem program="Ph.D" total={3} />
+                      <IntakeItem icon={<Users className="w-6 h-6" />} program="Ph.D" total={3} />
                     </ul>
-                    <Button
-                      variant="link"
-                      className="mt-4 text-blue-600 hover:text-blue-800 transition-colors duration-200"
-                    >
-                      Read more
+                    <Button variant="outline" className="mt-6 border-indigo-600 text-indigo-600 hover:bg-indigo-50">
+                      View All Programs
                       <ArrowRight className="ml-2 h-4 w-4" />
                     </Button>
-                  </div>
-                </div>
+                  </CardContent>
+                </Card>
               </div>
 
               {/* Right Column - Sidebar */}
@@ -304,106 +321,9 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Redesigned Programs Offered Section */}
-        <section className="py-20 bg-white">
-          <div className="container mx-auto px-4">
-            <h2 className="text-4xl font-bold text-center mb-4">Programs Offered</h2>
-            <p className="text-xl text-gray-600 text-center mb-12 max-w-3xl mx-auto">
-              Discover our cutting-edge programs designed to prepare you for the future of technology and innovation.
-            </p>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {programs.map((program) => (
-                <motion.div
-                  key={program.id}
-                  whileHover={{ scale: 1.03 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="cursor-pointer"
-                  onClick={() => setSelectedProgram(program)}
-                >
-                  <Card className="h-full overflow-hidden group hover:shadow-lg transition-all duration-300 border-t-4 border-blue-500">
-                    <CardHeader className="pb-4">
-                      <div className="flex items-center mb-2">
-                        <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 mr-4">
-                          {program.icon}
-                        </div>
-                        <CardTitle className="text-xl group-hover:text-blue-600 transition-colors duration-300">
-                          {program.name}
-                        </CardTitle>
-                      </div>
-                    </CardHeader>
-                    <CardContent>
-                      <CardDescription className="text-gray-600 mb-4">{program.description}</CardDescription>
-                      <ul className="space-y-2">
-                        {program.highlights.slice(0, 2).map((highlight, index) => (
-                          <li key={index} className="flex items-center text-sm text-gray-600">
-                            <ChevronRight className="w-4 h-4 mr-2 text-blue-500" />
-                            {highlight}
-                          </li>
-                        ))}
-                      </ul>
-                      <div className="mt-4 flex items-center text-blue-600 group-hover:text-blue-800 transition-colors duration-300">
-                        <span className="text-sm font-medium">Learn More</span>
-                        <ArrowRight className="ml-2 w-4 h-4" />
-                      </div>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Laboratories Section */}
-        <section className="py-20 bg-gray-50">
-          <div className="container mx-auto px-4">
-            <h2 className="text-4xl font-bold text-center mb-4">Our Laboratories</h2>
-            <p className="text-xl text-gray-600 text-center mb-12 max-w-3xl mx-auto">
-              Explore our state-of-the-art facilities where innovation and learning converge.
-            </p>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {laboratories.map((lab) => (
-                <motion.div
-                  key={lab.id}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="cursor-pointer"
-                  onClick={() => setSelectedLab(lab)}
-                >
-                  <Card className="h-full overflow-hidden group hover:shadow-xl transition-all duration-300 bg-gradient-to-br from-white to-indigo-50">
-                    <CardHeader>
-                      <div className="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center text-indigo-600 mb-4 group-hover:bg-indigo-200 transition-colors duration-300">
-                        {lab.icon}
-                      </div>
-                      <CardTitle className="text-2xl group-hover:text-indigo-600 transition-colors duration-300">
-                        {lab.name}
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <CardDescription className="text-gray-600">{lab.description}</CardDescription>
-                      <div className="mt-6 flex items-center text-indigo-600 group-hover:text-indigo-800 transition-colors duration-300">
-                        <span className="text-sm font-medium">Explore Lab</span>
-                        <ArrowRight className="ml-2 w-4 h-4" />
-                      </div>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Department Stats */}
-        <section className="py-20 bg-gradient-to-b from-blue-900 to-indigo-800 text-white">
-          <div className="container mx-auto px-4">
-            <h2 className="text-4xl font-bold text-center mb-12">Department at a Glance</h2>
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-              <StatCard icon={<Users className="w-8 h-8" />} value="550+" label="Students" />
-              <StatCard icon={<GraduationCap className="w-8 h-8" />} value="14" label="Faculty Members" />
-              <StatCard icon={<Flask className="w-8 h-8" />} value="10+" label="Research Labs" />
-              <StatCard icon={<Building2 className="w-8 h-8" />} value="5" label="Degree Programs" />
-            </div>
-          </div>
-        </section>
+        <ProgramsOffered />
+        <Laboratories />
+        <DepartmentStats />
 
         <AnimatePresence>
           {selectedProgram && (
@@ -528,10 +448,18 @@ function StatCard({ icon, value, label }) {
   )
 }
 
-function IntakeItem({ program, total, breakdown }) {
+function IntakeItem({ icon, program, total, breakdown }) {
   return (
-    <li className="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-gray-200 pb-4">
-      <div className="flex-1">
+    <motion.li
+      className="flex items-start space-x-4 p-3 rounded-lg hover:bg-indigo-50 transition-colors duration-300"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+    >
+      <div className="flex-shrink-0 w-10 h-10 bg-indigo-100 rounded-full flex items-center justify-center text-indigo-600">
+        {icon}
+      </div>
+      <div className="flex-grow">
         <h4 className="font-semibold text-lg text-gray-800">{program}</h4>
         {breakdown && (
           <div className="mt-1 text-sm text-gray-600">
@@ -544,8 +472,26 @@ function IntakeItem({ program, total, breakdown }) {
           </div>
         )}
       </div>
-      <div className="mt-2 sm:mt-0 text-2xl font-bold text-blue-600">{total}</div>
-    </li>
+      <div className="flex-shrink-0 text-2xl font-bold text-indigo-600">{total}</div>
+    </motion.li>
+  )
+}
+
+function AnnouncementCard({ title, date, description }) {
+  return (
+    <Card className="overflow-hidden hover:shadow-lg transition-shadow duration-300">
+      <CardHeader className="bg-gradient-to-r from-blue-500 to-blue-600">
+        <CardTitle className="text-xl font-bold text-white">{title}</CardTitle>
+        <CardDescription className="text-blue-100">{date}</CardDescription>
+      </CardHeader>
+      <CardContent className="p-4">
+        <p className="text-gray-600">{description}</p>
+        <Button variant="link" className="mt-4 text-blue-600 hover:text-blue-800 p-0">
+          Read more
+          <ArrowRight className="ml-2 h-4 w-4" />
+        </Button>
+      </CardContent>
+    </Card>
   )
 }
 

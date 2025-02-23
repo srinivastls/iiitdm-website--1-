@@ -1,36 +1,48 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useCallback } from "react"
 import Image from "next/image"
 import { motion, AnimatePresence } from "framer-motion"
 import { Button } from "@/components/ui/button"
-import { GraduationCap } from "lucide-react"
+import { GraduationCap, ChevronLeft, ChevronRight } from "lucide-react"
+import { useSwipeable } from "react-swipeable"
 
-const heroImages = [
-  "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/a1.jpg-I8LicaHK1UN1T2OxcHlwLygLoEvzlX.jpeg",
-  "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/a2-MAgm5cCraaRayUqlLNNKVwwBgzGeMr.jpeg",
-  "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/a8.jpg-EaU5qtJrJd2ne74m5tnqnSRvrKCdNW.jpeg",
-]
+const heroImages = ["/assets/a1.jpg", "/assets/a2.jpeg", "/assets/a8.jpg"]
 
 const imageDescriptions = [
   "IIITDM Kancheepuram Campus Building",
-  "IIITDM Kancheepuram Entrance",
-  "Our Industry Partners",
+  "State-of-the-art Research Facilities",
+  "Vibrant Student Life",
 ]
 
 export default function HeroSection() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % heroImages.length)
-    }, 5000)
-
-    return () => clearInterval(interval)
+  const nextImage = useCallback(() => {
+    setCurrentImageIndex((prevIndex) => (prevIndex + 1) % heroImages.length)
   }, [])
 
+  const prevImage = useCallback(() => {
+    setCurrentImageIndex((prevIndex) => (prevIndex - 1 + heroImages.length) % heroImages.length)
+  }, [])
+
+  useEffect(() => {
+    const interval = setInterval(nextImage, 5000)
+    return () => clearInterval(interval)
+  }, [nextImage])
+
+  const handlers = useSwipeable({
+    onSwipedLeft: nextImage,
+    onSwipedRight: prevImage,
+    preventDefaultTouchmoveEvent: true,
+    trackMouse: true,
+  })
+
   return (
-    <div className="relative min-h-[calc(100vh-4rem)] bg-gradient-to-br from-slate-50 via-blue-50/50 to-indigo-50/30 overflow-hidden">
+    <div
+      className="relative min-h-[calc(100vh-4rem)] bg-gradient-to-br from-slate-50 via-blue-50/50 to-indigo-50/30 overflow-hidden"
+      {...handlers}
+    >
       {/* Enhanced Background Pattern */}
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-[radial-gradient(circle_800px_at_50%_-100px,rgba(29,78,216,0.15),transparent)]" />
@@ -64,7 +76,7 @@ export default function HeroSection() {
                 className="space-y-6"
               >
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight bg-gradient-to-br from-gray-900 via-blue-900 to-indigo-900 bg-clip-text text-transparent">
-                  Department of Computer Science & Engineering
+                Department of Computer Science & Engineering
                 </h1>
 
                 <p className="text-lg text-slate-600 max-w-xl leading-relaxed">
@@ -73,7 +85,7 @@ export default function HeroSection() {
                 </p>
               </motion.div>
 
-              {/* CTA Buttons - Moved up and enhanced */}
+              {/* CTA Buttons */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -96,7 +108,7 @@ export default function HeroSection() {
               </motion.div>
             </div>
 
-            {/* Right Column - Sliding Images with enhanced styling */}
+            {/* Right Column - Image Carousel */}
             <div className="relative">
               <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
@@ -127,7 +139,23 @@ export default function HeroSection() {
                   </motion.div>
                 </AnimatePresence>
 
-                {/* Enhanced Image Navigation Dots */}
+                {/* Navigation Buttons */}
+                <button
+                  onClick={prevImage}
+                  className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white text-blue-600 p-2 rounded-full shadow-lg transition-all duration-300"
+                  aria-label="Previous image"
+                >
+                  <ChevronLeft className="w-6 h-6" />
+                </button>
+                <button
+                  onClick={nextImage}
+                  className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white text-blue-600 p-2 rounded-full shadow-lg transition-all duration-300"
+                  aria-label="Next image"
+                >
+                  <ChevronRight className="w-6 h-6" />
+                </button>
+
+                {/* Image Navigation Dots */}
                 <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex gap-2 z-10">
                   {heroImages.map((_, index) => (
                     <button
@@ -140,11 +168,11 @@ export default function HeroSection() {
                     />
                   ))}
                 </div>
-
-                {/* Decorative Elements */}
-                <div className="absolute -top-4 -right-4 w-24 h-24 bg-gradient-to-br from-blue-600/20 to-indigo-600/20 rounded-full blur-2xl" />
-                <div className="absolute -bottom-4 -left-4 w-32 h-32 bg-gradient-to-br from-blue-400/20 to-purple-600/20 rounded-full blur-2xl" />
               </motion.div>
+
+              {/* Decorative Elements */}
+              <div className="absolute -top-4 -right-4 w-24 h-24 bg-gradient-to-br from-blue-600/20 to-indigo-600/20 rounded-full blur-2xl" />
+              <div className="absolute -bottom-4 -left-4 w-32 h-32 bg-gradient-to-br from-blue-400/20 to-purple-600/20 rounded-full blur-2xl" />
             </div>
           </div>
         </div>

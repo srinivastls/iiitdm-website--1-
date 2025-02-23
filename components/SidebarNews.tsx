@@ -100,10 +100,14 @@ export default function SidebarNews() {
               className="space-y-4"
             >
               {newsData[currentNewsIndex].map((item, index) => (
-                <li key={index} className="border-b border-gray-100 pb-2">
+                <motion.li
+                  key={index}
+                  className="border-b border-gray-100 pb-2 hover:bg-blue-50 transition-colors duration-300 p-2 rounded"
+                  whileHover={{ scale: 1.05 }}
+                >
                   <h4 className="font-semibold text-gray-800">{item.title}</h4>
                   <p className="text-sm text-blue-600">{item.date}</p>
-                </li>
+                </motion.li>
               ))}
             </motion.ul>
           </AnimatePresence>
@@ -135,10 +139,14 @@ export default function SidebarNews() {
               className="space-y-4"
             >
               {achievementsData[currentAchievementsIndex].map((item, index) => (
-                <li key={index} className="border-b border-gray-100 pb-2">
+                <motion.li
+                  key={index}
+                  className="border-b border-gray-100 pb-2 hover:bg-blue-50 transition-colors duration-300 p-2 rounded"
+                  whileHover={{ scale: 1.05 }}
+                >
                   <h4 className="font-semibold text-gray-800">{item.title}</h4>
                   <p className="text-sm text-blue-600">{item.person}</p>
-                </li>
+                </motion.li>
               ))}
             </motion.ul>
           </AnimatePresence>
@@ -170,10 +178,14 @@ export default function SidebarNews() {
               className="space-y-4"
             >
               {announcementsData[currentAnnouncementsIndex].map((item, index) => (
-                <li key={index} className="border-b border-gray-100 pb-2">
+                <motion.li
+                  key={index}
+                  className="border-b border-gray-100 pb-2 hover:bg-blue-50 transition-colors duration-300 p-2 rounded"
+                  whileHover={{ scale: 1.05 }}
+                >
                   <h4 className="font-semibold text-gray-800">{item.title}</h4>
                   <p className="text-sm text-blue-600">{item.deadline}</p>
-                </li>
+                </motion.li>
               ))}
             </motion.ul>
           </AnimatePresence>
