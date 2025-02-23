@@ -31,6 +31,7 @@ import HeroSection from "@/components/HeroSection"
 import ProgramsOffered from "@/components/ProgramsOffered"
 import Laboratories from "@/components/Laboratories"
 import DepartmentStats from "@/components/DepartmentStats"
+import PastRecruiters from "@/components/PastRecruiters"
 
 // ... (keep the rest of your imports and data)
 
@@ -245,20 +246,18 @@ export default function Home() {
                         Manufacturing related industries in addition to application development avenues and higher
                         studies that are open to conventional Computer Science engineers.
                       </motion.p>
-
                       <motion.p
-                        className="group-hover:text-blue-700 transition-colors duration-300"
+                        className="mb-4 group-hover:text-blue-700 transition-colors duration-300"
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5, delay: 0.2 }}
+                        transition={{ duration: 0.5, delay: 0.1 }}
                       >
-                        
-                        There are 14 faculty members who are actively involved in research in areas
-                         such as knowledge engineering, machine learning, wireless sensor networks, 
-                         membrane computing, cyber-physical systems, IOT, high performance computing, 
-                         VLSI architectures, biometrics, machine learning, image processing, 
-                         soft computing and theoretical computer science.
-                      
+                        This program is aimed at producing engineers equipped with skills required for efficient
+                        hardware-software interaction. In addition to courses offered by the conventional Computer
+                        Science curriculum, this novel program offers core courses such as Embedded Systems,
+                        Human-Computer Interaction, Signals and Systems, Product Design etc., that equip the students
+                        with both computing and electronics engineering skills that are very much required for the
+                        successful creation of products requiring hardware - software interactions.
                       </motion.p>
                     </div>
                     <Button className="mt-6 bg-blue-600 hover:bg-blue-700 text-white">
@@ -270,7 +269,7 @@ export default function Home() {
 
                 {/* Intake in CSE Department Card */}
                 <Card className="overflow-hidden group hover:shadow-lg transition-shadow duration-300">
-                  <CardHeader className="bg-blue-600">
+                  <CardHeader className="bg-gradient-to-r from-blue-600 to-indigo-600">
                     <CardTitle className="text-2xl font-bold text-white">Intake in CSE Department</CardTitle>
                     <CardDescription className="text-indigo-100">Academic Year 2021-2022</CardDescription>
                   </CardHeader>
@@ -324,6 +323,7 @@ export default function Home() {
         <ProgramsOffered />
         <Laboratories />
         <DepartmentStats />
+        <PastRecruiters />
 
         <AnimatePresence>
           {selectedProgram && (

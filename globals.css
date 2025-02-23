@@ -66,3 +66,36 @@ html {
   border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
+/* Add these animations to your existing globals.css */
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-50%));
+  }
+}
+
+@keyframes scroll-reverse {
+  0% {
+    transform: translateX(calc(-50%));
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.animate-scroll {
+  animation: scroll 40s linear infinite;
+}
+
+.animate-scroll-reverse {
+  animation: scroll-reverse 40s linear infinite;
+}
+
+/* Add hover pause effect */
+.animate-scroll:hover,
+.animate-scroll-reverse:hover {
+  animation-play-state: paused;
+}
+
