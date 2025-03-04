@@ -1,7 +1,7 @@
 "use client"
 
-import { useState, useRef, useEffect } from "react"
-import { motion, useInView, useAnimation, AnimatePresence } from "framer-motion"
+import { useState } from "react"
+import { motion, AnimatePresence } from "framer-motion"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog"
 import { ArrowRight, ChevronRight, GraduationCap, BookOpen, Database, Code, BotIcon as Robot } from "lucide-react"
@@ -46,56 +46,24 @@ const programs = [
 
 export default function ProgramsOffered() {
   const [selectedProgram, setSelectedProgram] = useState(null)
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, amount: 0.2 })
-  const mainControls = useAnimation()
-
-  useEffect(() => {
-    if (isInView) {
-      mainControls.start("visible")
-    }
-  }, [isInView, mainControls])
 
   return (
-    <section ref={ref} className="py-20 bg-gradient-to-br from-white via-blue-50 to-indigo-50">
+    <section className="py-20 bg-gradient-to-br from-white via-blue-50 to-indigo-50">
       <div className="container mx-auto px-4">
-        <motion.h2
-          className="text-4xl font-bold text-center mb-4 text-blue-900"
-          initial={{ opacity: 0, y: 20 }}
-          animate={mainControls}
-          transition={{ duration: 0.5 }}
-          variants={{
-            visible: { opacity: 1, y: 0 },
-          }}
-        >
-          Programs Offered
-        </motion.h2>
-        <motion.p
-          className="text-xl text-gray-600 text-center mb-12 max-w-3xl mx-auto"
-          initial={{ opacity: 0, y: 20 }}
-          animate={mainControls}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          variants={{
-            visible: { opacity: 1, y: 0 },
-          }}
-        >
+        <h2 className="text-4xl font-bold text-center mb-4 text-blue-900">Programs Offered</h2>
+        <p className="text-xl text-gray-600 text-center mb-12 max-w-3xl mx-auto">
           Discover our cutting-edge programs designed to prepare you for the future of technology and innovation.
-        </motion.p>
+        </p>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {programs.map((program, index) => (
+          {programs.map((program) => (
             <motion.div
               key={program.id}
-              initial={{ opacity: 0, y: 50 }}
-              animate={mainControls}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              variants={{
-                visible: { opacity: 1, y: 0 },
-              }}
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.98 }}
+              className="cursor-pointer"
+              onClick={() => setSelectedProgram(program)}
             >
-              <Card
-                className="h-full overflow-hidden group hover:shadow-lg transition-all duration-300 border-t-4 border-blue-500 cursor-pointer"
-                onClick={() => setSelectedProgram(program)}
-              >
+              <Card className="h-full overflow-hidden group hover:shadow-lg transition-all duration-300 border-t-4 border-blue-500">
                 <CardHeader className="pb-4">
                   <div className="flex items-center mb-2">
                     <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 mr-4">

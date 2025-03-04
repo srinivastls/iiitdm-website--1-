@@ -1,0 +1,69 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  /* Hero section styling */
+  .overview-hero {
+    @apply relative py-24 overflow-hidden;
+    background: linear-gradient(135deg, #f0f4ff 0%, #e0e7ff 100%);
+  }
+
+  /* Card styling */
+  .overview-card {
+    @apply h-full overflow-hidden hover:shadow-xl transition-all duration-300 border-t-4 border-blue-500;
+  }
+
+  /* Track card headers */
+  .track-card-header-science {
+    @apply bg-gradient-to-r from-blue-500 to-blue-600 text-white;
+  }
+
+  .track-card-header-engineering {
+    @apply bg-gradient-to-r from-indigo-500 to-indigo-600 text-white;
+  }
+
+  .track-card-header-technology {
+    @apply bg-gradient-to-r from-purple-500 to-purple-600 text-white;
+  }
+
+  .track-card-header-design {
+    @apply bg-gradient-to-r from-teal-500 to-teal-600 text-white;
+  }
+
+  /* List item styling */
+  .overview-list-item {
+    @apply flex items-start;
+  }
+
+  .overview-list-item-icon {
+    @apply w-5 h-5 mr-2 text-blue-600 flex-shrink-0 mt-1;
+  }
+
+  /* Program card styling */
+  .program-card {
+    @apply h-full overflow-hidden hover:shadow-xl transition-all duration-300 border-t-4 border-blue-500;
+  }
+
+  .program-icon-container {
+    @apply mb-4 w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center text-blue-600;
+  }
+
+  .program-badge {
+    @apply mb-3 inline-block px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium;
+  }
+
+  /* CTA section styling */
+  .cta-section {
+    @apply py-16 bg-gradient-to-r from-blue-600 to-indigo-600 text-white;
+  }
+
+  .cta-button-primary {
+    @apply bg-white text-blue-600 hover:bg-blue-50;
+  }
+
+  .cta-button-secondary {
+    @apply border-white text-white hover:bg-white/10;
+  }
+}
+

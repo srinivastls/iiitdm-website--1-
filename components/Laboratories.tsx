@@ -1,8 +1,8 @@
 "use client"
 
-import { useState, useRef, useEffect } from "react"
+import { useState } from "react"
 import Image from "next/image"
-import { motion, useInView, useAnimation } from "framer-motion"
+import { motion, AnimatePresence } from "framer-motion"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog"
 import {
@@ -15,7 +15,6 @@ import {
   CircuitBoardIcon as Circuit,
   Laptop,
 } from "lucide-react"
-import { AnimatePresence } from "framer-motion"
 
 const laboratories = [
   {
@@ -71,56 +70,24 @@ const laboratories = [
 
 export default function Laboratories() {
   const [selectedLab, setSelectedLab] = useState(null)
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, amount: 0.2 })
-  const mainControls = useAnimation()
-
-  useEffect(() => {
-    if (isInView) {
-      mainControls.start("visible")
-    }
-  }, [isInView, mainControls])
 
   return (
-    <section ref={ref} className="py-20 bg-gradient-to-br from-indigo-50 via-blue-50 to-white">
+    <section className="py-20 bg-gradient-to-br from-indigo-50 via-blue-50 to-white">
       <div className="container mx-auto px-4">
-        <motion.h2
-          className="text-4xl font-bold text-center mb-4 text-indigo-900"
-          initial={{ opacity: 0, y: 20 }}
-          animate={mainControls}
-          transition={{ duration: 0.5 }}
-          variants={{
-            visible: { opacity: 1, y: 0 },
-          }}
-        >
-          Our Laboratories
-        </motion.h2>
-        <motion.p
-          className="text-xl text-gray-600 text-center mb-12 max-w-3xl mx-auto"
-          initial={{ opacity: 0, y: 20 }}
-          animate={mainControls}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          variants={{
-            visible: { opacity: 1, y: 0 },
-          }}
-        >
+        <h2 className="text-4xl font-bold text-center mb-4 text-indigo-900">Our Laboratories</h2>
+        <p className="text-xl text-gray-600 text-center mb-12 max-w-3xl mx-auto">
           Explore our state-of-the-art facilities where innovation and learning converge.
-        </motion.p>
+        </p>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {laboratories.map((lab, index) => (
+          {laboratories.map((lab) => (
             <motion.div
               key={lab.id}
-              initial={{ opacity: 0, y: 50 }}
-              animate={mainControls}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              variants={{
-                visible: { opacity: 1, y: 0 },
-              }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="cursor-pointer"
+              onClick={() => setSelectedLab(lab)}
             >
-              <Card
-                className="h-full overflow-hidden group hover:shadow-xl transition-all duration-300 bg-gradient-to-br from-white to-indigo-50 cursor-pointer"
-                onClick={() => setSelectedLab(lab)}
-              >
+              <Card className="h-full overflow-hidden group hover:shadow-xl transition-all duration-300 bg-gradient-to-br from-white to-indigo-50">
                 <CardHeader>
                   <div className="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center text-indigo-600 mb-4 group-hover:bg-indigo-200 transition-colors duration-300">
                     {lab.icon}

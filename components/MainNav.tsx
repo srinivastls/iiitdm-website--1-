@@ -2,11 +2,12 @@
 
 import { useState, useEffect, useRef } from "react"
 import Link from "next/link"
+import { usePathname } from "next/navigation"
 import { motion, AnimatePresence } from "framer-motion"
 import { ChevronDown, Menu, X } from "lucide-react"
 
 const navItems = [
-  { label: "Home", href: "/", current: true },
+  { label: "Home", href: "/" },
   {
     label: "Teaching",
     href: "/teaching",
@@ -61,11 +62,16 @@ export default function MainNav() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
   const navRef = useRef<HTMLDivElement>(null)
+  const pathname = usePathname()
 
   const toggleMobileMenu = () => setMobileMenuOpen(!mobileMenuOpen)
 
   const handleDropdownToggle = (label: string) => {
-    setActiveDropdown(activeDropdown === label ? null : label)
+    if (activeDropdown === label) {
+      setActiveDropdown(null)
+    } else {
+      setActiveDropdown(label)
+    }
   }
 
   useEffect(() => {
@@ -81,49 +87,73 @@ export default function MainNav() {
     }
   }, [])
 
-  const NavItem = ({ item, mobile = false }) => {
+  // Check if a path is active, including partial matches for subpaths
+  const isActivePath = (href: string) => {
+    if (href === "/") {
+      return pathname === "/"
+    }
+    return pathname === href || pathname.startsWith(`${href}/`)
+  }
+
+  const NavItem = ({ item, mobile = false, level = 0 }) => {
     const hasSubItems = item.subItems && item.subItems.length > 0
+    const isActive = isActivePath(item.href)
+
+    // Check if any subitem is active
+    const hasActiveChild =
+      hasSubItems &&
+      item.subItems.some(
+        (subItem) =>
+          isActivePath(subItem.href) ||
+          (subItem.subItems && subItem.subItems.some((grandChild) => isActivePath(grandChild.href))),
+      )
+
+    // Determine if dropdown should be open based on parent item or activity
+    const isDropdownOpen = activeDropdown === item.label || (hasActiveChild && level === 0 && !mobile)
 
     return (
       <li className={`relative ${mobile ? "w-full" : ""}`}>
         {hasSubItems ? (
-          <button
-            onClick={() => handleDropdownToggle(item.label)}
-            className={`flex items-center justify-between w-full px-3 py-2 text-sm font-medium ${
-              item.current ? "text-blue-600 bg-blue-50" : "text-gray-700 hover:text-blue-600 hover:bg-blue-50"
-            } rounded-md transition-colors ${mobile ? "px-4" : ""}`}
-          >
-            {item.label}
-            <ChevronDown
-              className={`ml-1 h-4 w-4 transition-transform ${activeDropdown === item.label ? "rotate-180" : ""}`}
-            />
-          </button>
+          <div className="w-full">
+            <button
+              onClick={() => handleDropdownToggle(item.label)}
+              className={`flex items-center justify-between w-full px-3 py-2 text-sm font-medium ${
+                isActive || hasActiveChild
+                  ? "text-blue-600 bg-blue-50"
+                  : "text-gray-700 hover:text-blue-600 hover:bg-blue-50"
+              } rounded-md transition-colors ${mobile ? "px-4" : ""}`}
+            >
+              {item.label}
+              <ChevronDown className={`ml-1 h-4 w-4 transition-transform ${isDropdownOpen ? "rotate-180" : ""}`} />
+            </button>
+
+            {isDropdownOpen && (
+              <AnimatePresence>
+                <motion.ul
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.2 }}
+                  className={`${
+                    mobile ? "mt-1 ml-4" : "absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-20"
+                  }`}
+                >
+                  {item.subItems.map((subItem) => (
+                    <NavItem key={subItem.label} item={subItem} mobile={mobile} level={level + 1} />
+                  ))}
+                </motion.ul>
+              </AnimatePresence>
+            )}
+          </div>
         ) : (
           <Link
             href={item.href}
             className={`block px-3 py-2 text-sm font-medium ${
-              item.current ? "text-blue-600 bg-blue-50" : "text-gray-700 hover:text-blue-600 hover:bg-blue-50"
+              isActive ? "text-blue-600 bg-blue-50" : "text-gray-700 hover:text-blue-600 hover:bg-blue-50"
             } rounded-md transition-colors ${mobile ? "px-4" : ""}`}
           >
             {item.label}
           </Link>
-        )}
-        {hasSubItems && activeDropdown === item.label && (
-          <AnimatePresence>
-            <motion.ul
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.2 }}
-              className={`${
-                mobile ? "mt-1 ml-4" : "absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-20"
-              }`}
-            >
-              {item.subItems.map((subItem) => (
-                <NavItem key={subItem.label} item={subItem} mobile={mobile} />
-              ))}
-            </motion.ul>
-          </AnimatePresence>
         )}
       </li>
     )
@@ -155,7 +185,7 @@ export default function MainNav() {
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.3 }}
-              className="absolute top-full left-0 right-0 bg-white shadow-md rounded-b-lg overflow-hidden"
+              className="absolute top-full left-0 right-0 bg-white shadow-md rounded-b-lg overflow-hidden max-h-[80vh] overflow-y-auto"
             >
               <ul className="py-2">
                 {navItems.map((item) => (
