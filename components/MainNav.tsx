@@ -13,9 +13,9 @@ const navItems = [
     href: "/teaching",
     subItems: [
       { label: "Overview", href: "/teaching/overview" },
-      { label: "Curriculum", href: "/teaching/curriculum" },
+      { label: "Curriculum", href: "https://www.iiitdm.ac.in/students/existing-students/curriculum-info",target:"__blank" },
       { label: "Online Electives", href: "/teaching/online-electives" },
-      { label: "Time Table", href: "/teaching/time-table" },
+      { label: "Time Table", href: "https://www.iiitdm.ac.in/students/existing-students/time-table",target:"__blank" },
       { label: "Lecture Notes", href: "/teaching/lecture-notes" },
       { label: "Best Projects", href: "/teaching/best-projects" },
     ],
@@ -26,7 +26,7 @@ const navItems = [
     subItems: [
       { label: "Faculty", href: "/people/faculty" },
       { label: "Staff", href: "/people/staff" },
-      { label: "Research Scholars", href: "/people/research-scholars" },
+      { label: "Research Scholars", href: "https://www.iiitdm.ac.in/people/research-scholars/cse" ,target:"__blank"},
       {
         label: "Alumni",
         href: "/people/alumni",
@@ -53,9 +53,15 @@ const navItems = [
     subItems: [{ label: "Workshop", href: "/outreach/workshop" }],
   },
   { label: "Industrial Consultancy", href: "/industrial-consultancy" },
-  { label: "Gallery", href: "/gallery" },
-  { label: "CS Club", href: "/cs-club" },
-  { label: "CSE Moodle", href: "/cse-moodle" },
+ // { label: "Gallery", href: "/gallery" },
+  { label: "Clubs", 
+    href: "/clubs",
+    subItems: [
+      { label: "CS Club", href: "https://www.cse.iiitdm.ac.in/csclub.html", target: "__blank" },
+      { label: "Developers Club", href: "https://www.devclub.iiitdm.ac.in", target: "__blank" },
+    ],
+  },
+  { label: "CSE Moodle", href: "http://172.16.1.173/moodle/", target: "__blank" },
 ]
 
 export default function MainNav() {
@@ -146,14 +152,28 @@ export default function MainNav() {
             )}
           </div>
         ) : (
-          <Link
-            href={item.href}
-            className={`block px-3 py-2 text-sm font-medium ${
-              isActive ? "text-blue-600 bg-blue-50" : "text-gray-700 hover:text-blue-600 hover:bg-blue-50"
-            } rounded-md transition-colors ${mobile ? "px-4" : ""}`}
-          >
-            {item.label}
-          </Link>
+          // Check if the item has a target and if it's a valid external link
+          item.target === "__blank" ? (
+            <a
+              href={item.href}
+              target={item.target}
+              rel="noopener noreferrer"
+              className={`block px-3 py-2 text-sm font-medium ${
+                isActive ? "text-blue-600 bg-blue-50" : "text-gray-700 hover:text-blue-600 hover:bg-blue-50"
+              } rounded-md transition-colors ${mobile ? "px-4" : ""}`}
+            >
+              {item.label}
+            </a>
+          ) : (
+            <Link
+              href={item.href}
+              className={`block px-3 py-2 text-sm font-medium ${
+                isActive ? "text-blue-600 bg-blue-50" : "text-gray-700 hover:text-blue-600 hover:bg-blue-50"
+              } rounded-md transition-colors ${mobile ? "px-4" : ""}`}
+            >
+              {item.label}
+            </Link>
+          )
         )}
       </li>
     )
@@ -199,4 +219,3 @@ export default function MainNav() {
     </nav>
   )
 }
-

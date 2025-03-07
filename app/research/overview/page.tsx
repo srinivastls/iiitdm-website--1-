@@ -17,6 +17,8 @@ import {
   ArrowRight,
 } from "lucide-react"
 import Link from "next/link"
+import MainNav from "@/components/MainNav"
+
 
 const researchAreas = [
   {
@@ -166,6 +168,24 @@ export default function ResearchOverview() {
 
   return (
     <div className="min-h-screen bg-white">
+      {/* Header */}
+      <header className="fixed top-0 left-0 right-0 z-50 bg-white shadow-md">
+        <div className="container mx-auto px-4">
+          <div className="flex items-center justify-between py-4">
+            <Link href="/" className="flex items-center space-x-2">
+              <Image src="/assets/image.png" alt="IIITDM Kancheepuram Logo" width={50} height={50} />
+              <div>
+                <span className="font-bold text-xl text-blue-900 block">IIITDM Kancheepuram</span>
+                <span className="text-sm text-gray-600">Department of Computer Science & Engineering</span>
+              </div>
+            </Link>
+            <MainNav />
+          </div>
+        </div>
+      </header>
+
+
+
       {/* Hero Section */}
       <section id="hero" ref={sectionRefs.hero} className="relative py-20 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-indigo-50 z-0"></div>

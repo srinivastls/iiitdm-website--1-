@@ -20,7 +20,9 @@ import {
   CheckCircle,
   X,
 } from "lucide-react"
-
+import MainNav from "@/components/MainNav"
+import Link from "next/link"
+import Image from "next/image"
 // Project data
 const projects = [
   {
@@ -221,7 +223,25 @@ export default function IndustrialConsultancy() {
   }
 
   return (
+    <div>
+      
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800">
+    {/* Header */}
+      <header className="fixed top-0 left-0 right-0 z-40 bg-white shadow-md">
+        <div className="container mx-auto px-4">
+          <div className="flex items-center justify-between py-4">
+            <Link href="/" className="flex items-center space-x-2">
+              <Image src="/assets/image.png" alt="IIITDM Kancheepuram Logo" width={50} height={50} />
+              <div>
+                <span className="font-bold text-xl text-blue-900 block">IIITDM Kancheepuram</span>
+                <span className="text-sm text-gray-600">Department of Computer Science & Engineering</span>
+              </div>
+            </Link>
+            <MainNav />
+          </div>
+        </div>
+      </header>
+
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-gradient-to-r from-blue-600 to-indigo-700 text-white">
         <div className="absolute inset-0 overflow-hidden">
@@ -858,6 +878,7 @@ export default function IndustrialConsultancy() {
           </motion.div>
         )}
       </AnimatePresence>
+    </div>
     </div>
   )
 }
