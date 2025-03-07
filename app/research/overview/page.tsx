@@ -19,7 +19,6 @@ import {
 import Link from "next/link"
 import MainNav from "@/components/MainNav"
 
-import Image from "next/image"
 
 const researchAreas = [
   {
@@ -174,7 +173,7 @@ export default function ResearchOverview() {
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between py-4">
             <Link href="/" className="flex items-center space-x-2">
-              <Image src="/logo-placeholder.svg" alt="IIITDM Kancheepuram Logo" width={50} height={50} />
+              <Image src="/assets/image.png" alt="IIITDM Kancheepuram Logo" width={50} height={50} />
               <div>
                 <span className="font-bold text-xl text-blue-900 block">IIITDM Kancheepuram</span>
                 <span className="text-sm text-gray-600">Department of Computer Science & Engineering</span>
