@@ -4,6 +4,8 @@ import { useState, useEffect, useRef } from "react"
 import { motion } from "framer-motion"
 import { ArrowRight, Calendar, DollarSign, Users, Award, ChevronRight, ExternalLink } from "lucide-react"
 import Link from "next/link"
+import MainNav from "@/components/MainNav"
+import Image from "next/image"
 
 // Define the project type
 interface ResearchProject {
@@ -164,6 +166,22 @@ export default function SponsoredResearchPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      {/* Header */}
+      <header className="fixed top-0 left-0 right-0 z-50 bg-white shadow-md">
+        <div className="container mx-auto px-4">
+          <div className="flex items-center justify-between py-4">
+            <Link href="/" className="flex items-center space-x-2">
+              <Image src="/logo-placeholder.svg" alt="IIITDM Kancheepuram Logo" width={50} height={50} />
+              <div>
+                <span className="font-bold text-xl text-blue-900 block">IIITDM Kancheepuram</span>
+                <span className="text-sm text-gray-600">Department of Computer Science & Engineering</span>
+              </div>
+            </Link>
+            <MainNav />
+          </div>
+        </div>
+      </header>
+
       {/* Hero Section */}
       <motion.div
         ref={heroRef}
